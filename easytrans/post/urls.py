@@ -1,7 +1,12 @@
 from django.urls import path
-from .views import PosterAPIView, PosterDetails
+from .views import PosterViewSet
+from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
-    path('post', PosterAPIView.as_view()),
-    path('detail/<int:id>/', PosterDetails.as_view())
 ]
+
+router = DefaultRouter()
+router.register('postes', PosterViewSet)
+
+urlpatterns += router.urls
+
