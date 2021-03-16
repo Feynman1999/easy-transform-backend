@@ -6,7 +6,7 @@ urlpatterns = [
 ]
 
 router = DefaultRouter()
-router.register('postes', PosterViewSet)
+router.register('postes', PosterViewSet)  # 只包含五种默认的
 
 urlpatterns += router.urls
 

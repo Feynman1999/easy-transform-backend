@@ -1,0 +1,59 @@
+INFO 2021-03-17 01:42:38,981 autoreload 14728 5500 617 Watching for file changes with StatReloader
+ERROR 2021-03-17 01:42:40,539 log 14728 13916 224 Internal Server Error: /
+Traceback (most recent call last):
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django_redis\cache.py", line 27, in _decorator
+    return method(self, *args, **kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django_redis\cache.py", line 76, in set
+    return self.client.set(*args, **kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django_redis\client\default.py", line 166, in set
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ResponseError: MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 416, in initial
+    self.check_throttles(request)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\views.py", line 359, in check_throttles
+    if not throttle.allow_request(request, self):
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\throttling.py", line 132, in allow_request
+    return self.throttle_success()
+  File "E:\anaconda\envs\django3.1\lib\site-packages\rest_framework\throttling.py", line 140, in throttle_success
+    self.cache.set(self.key, self.history, self.duration)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django_redis\cache.py", line 34, in _decorator
+    raise e.__cause__
+  File "E:\anaconda\envs\django3.1\lib\site-packages\django_redis\client\default.py", line 156, in set
+    return bool(client.set(nkey, nvalue, nx=nx, px=timeout, xx=xx))
+  File "E:\anaconda\envs\django3.1\lib\site-packages\redis\client.py", line 1801, in set
+    return self.execute_command('SET', *pieces)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\redis\client.py", line 901, in execute_command
+    return self.parse_response(conn, command_name, **options)
+  File "E:\anaconda\envs\django3.1\lib\site-packages\redis\client.py", line 915, in parse_response
+    response = connection.read_response()
+  File "E:\anaconda\envs\django3.1\lib\site-packages\redis\connection.py", line 756, in read_response
+    raise response
+redis.exceptions.ResponseError: MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.
+ERROR 2021-03-17 01:42:40,542 basehttp 14728 13916 157 "GET / HTTP/1.1" 500 150964
+INFO 2021-03-17 01:47:25,926 basehttp 14728 13916 157 "GET / HTTP/1.1" 200 5262
+WARNING 2021-03-17 01:47:28,074 log 14728 13916 224 Not Found: /post
+WARNING 2021-03-17 01:47:28,075 basehttp 14728 13916 157 "GET /post HTTP/1.1" 404 3127
+WARNING 2021-03-17 01:47:29,778 log 14728 13916 224 Not Found: /posted
+WARNING 2021-03-17 01:47:29,779 basehttp 14728 13916 157 "GET /posted HTTP/1.1" 404 3133
+INFO 2021-03-17 01:47:31,971 basehttp 14728 13916 157 "GET /postes HTTP/1.1" 301 0
+INFO 2021-03-17 01:47:31,999 basehttp 14728 13916 157 "GET /postes/ HTTP/1.1" 200 6443

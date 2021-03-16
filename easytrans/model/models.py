@@ -7,7 +7,7 @@ from django.db import models
 #     date = models.DateTimeField(auto_now_add=True) # 创建时的时间
 #     user =
 #     model =
-#     data =
+#     data = 需要搭建一个专门的图片和视频服务器
 #     result =
 #     params = {dict} {json}
 #
