@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'core',
     'post',
     'model',
+    'users',
+    'verification'
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,7 @@ WSGI_APPLICATION = 'easytrans.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test_db',
+        'NAME': 'et',
         'USER': 'root',
         'PASSWORD': 'bbezcyx',
         'HOST': '127.0.0.1',
@@ -142,7 +144,10 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+import os
+
 REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'easytrans.utils.exceptions.exception_handler',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',  # session认证，比较老，后面可以用jwt实现
         'rest_framework.authentication.BasicAuthentication',   # 基本认证
@@ -175,12 +180,18 @@ CACHES = {
             "PASSWORD": "bbezcyx",
         },
     },
+    'verify_sms_codes': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/2',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": "bbezcyx",
+        },
+    }
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
-
-import os
 
 LOGGING = {
     'version': 1,
@@ -224,3 +235,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
